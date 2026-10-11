@@ -190,7 +190,7 @@
         /* Education */
         .credentials {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr));
             gap: 1.25rem;
             list-style: none;
         }
@@ -216,7 +216,7 @@
         /* Specialties */
         .specialties {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
             gap: 1.5rem;
         }
 
@@ -241,7 +241,7 @@
         /* Therapy approaches */
         .approach-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
             gap: 1.25rem;
         }
 
@@ -329,7 +329,100 @@
         .cta h2 { color: #fff; padding-bottom: 0; }
         .cta h2::after { display: none; }
         .cta p { color: rgba(255, 255, 255, 0.88); max-width: 620px; margin-left: auto; margin-right: auto; }
-        .phone { margin: 2rem 0; }
+        .phone {
+            margin: 2rem 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.9rem;
+        }
+
+        .phone a.email-link {
+            font-size: clamp(0.95rem, 2.6vw, 1.15rem);
+            letter-spacing: 0;
+            background: transparent;
+            color: #fff;
+            border: 1.5px solid rgba(255, 255, 255, 0.6);
+            padding: 0.65rem 1.5rem;
+            overflow-wrap: anywhere;
+        }
+
+        .phone a.email-link:hover { background: rgba(255, 255, 255, 0.1); }
+
+        /* Contact popup */
+        .modal-backdrop {
+            position: fixed;
+            inset: 0;
+            z-index: 200;
+            background: rgba(28, 59, 48, 0.45);
+            backdrop-filter: blur(3px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.25rem;
+        }
+
+        .modal {
+            position: relative;
+            background: #fff;
+            border-radius: calc(var(--radius) * 1.3);
+            padding: 2.25rem 2rem 2rem;
+            width: 100%;
+            max-width: 440px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        .modal h3 { font-size: 1.6rem; margin-bottom: 0.5rem; }
+        .modal p { color: var(--muted); font-size: 1rem; margin-bottom: 1.5rem; }
+
+        .modal-close {
+            position: absolute;
+            top: 0.75rem;
+            right: 0.9rem;
+            background: none;
+            border: none;
+            font-size: 1.8rem;
+            line-height: 1;
+            color: var(--muted);
+            cursor: pointer;
+        }
+
+        .modal-close:hover { color: var(--green-900); }
+
+        .modal-option {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: var(--green-50);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1rem 1.25rem;
+            text-decoration: none;
+            margin-top: 0.75rem;
+            transition: border-color 0.2s, background 0.2s;
+        }
+
+        .modal-option:hover { border-color: var(--green-500); background: #fff; }
+
+        .modal-option .label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--muted);
+        }
+
+        .modal-option .value {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--green-900);
+            overflow-wrap: anywhere;
+        }
+
+        .footer-contact a { color: #fff; text-decoration: none; }
+        .footer-contact a:hover { text-decoration: underline; }
+        footer p.footer-contact + p { margin-top: 0.6rem; font-size: 0.92rem; opacity: 1; }
 
         .phone a {
             display: inline-block;
@@ -361,8 +454,15 @@
         /* Mobile */
         @media (max-width: 720px) {
             body { font-size: 17px; }
-            .nav-inner { flex-direction: column; padding: 0.75rem 1rem; }
-            .nav-links { justify-content: center; }
+            html { scroll-padding-top: 110px; }
+            .nav-inner { flex-direction: column; gap: 0.35rem; padding: 0.6rem 0.75rem; }
+            .nav-name { font-size: 1rem; }
+            .nav-links { justify-content: center; gap: 0.1rem; }
+            .nav-links a { font-size: 0.85rem; padding: 0.35rem 0.6rem; }
+            .nav-links a.hide-mobile { display: none; }
+            .phone a { padding: 0.75rem 1.4rem; }
+            .cta { padding: 2.5rem 1.25rem; }
+            .modal { padding: 2rem 1.25rem 1.5rem; }
             .hero { padding: 4rem 1.25rem 3.5rem; }
             .container { padding: 3rem 1.25rem; }
             .about-grid { grid-template-columns: 1fr; gap: 1.75rem; }
@@ -377,7 +477,7 @@
             <a href="#top" class="nav-name">Dr. Lisa Powers-Luketic</a>
             <div class="nav-links">
                 <a href="#about">About</a>
-                <a href="#education">Education</a>
+                <a href="#education" class="hide-mobile">Education</a>
                 <a href="#services">Services</a>
                 <a href="#approaches">Therapies</a>
                 <a href="#contact" class="nav-cta">Contact</a>
@@ -390,7 +490,7 @@
         <header class="hero" id="top">
             <h1>Dr. Lisa Powers-Luketic, Psychologist</h1>
             <p>Clinical Neuropsychology &amp; Clinical Psychology</p>
-            <a href="tel:416-418-6851" class="header-btn">Book a Consultation</a>
+            <a href="tel:416-418-6851" class="header-btn js-book">Book a Consultation</a>
         </header>
 
         <div class="container">
@@ -496,8 +596,9 @@
                 <p>Taking the first step toward healing takes courage. I'm here to support you with compassionate, professional care.</p>
                 <div class="phone">
                     <a href="tel:416-418-6851">416-418-6851</a>
+                    <a href="mailto:drlpowers-l@rogers.com" class="email-link">drlpowers-l@rogers.com</a>
                 </div>
-                <p>Call today to schedule a confidential consultation and learn how we can work together toward your goals.</p>
+                <p>Call or email today to schedule a confidential consultation and learn how we can work together toward your goals.</p>
             </div>
         </div>
     </main>
@@ -766,15 +867,34 @@
         <div class="article">
             <div class="cta">
                 <h2>Wondering if this is right for you?</h2>
-                <p>Call to schedule a confidential consultation and talk through which approach best fits your needs.</p>
+                <p>Call or email to schedule a confidential consultation and talk through which approach best fits your needs.</p>
                 <div class="phone">
                     <a href="tel:416-418-6851">416-418-6851</a>
+                    <a href="mailto:drlpowers-l@rogers.com" class="email-link">drlpowers-l@rogers.com</a>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- Contact popup (opens from "Book a Consultation" on computers) -->
+    <div class="modal-backdrop" id="contact-modal" hidden>
+        <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+            <button class="modal-close" aria-label="Close">&times;</button>
+            <h3 id="modal-title">Book a Consultation</h3>
+            <p>Reach out by phone or email to schedule a confidential consultation.</p>
+            <a href="tel:416-418-6851" class="modal-option">
+                <span class="label">Call</span>
+                <span class="value">416-418-6851</span>
+            </a>
+            <a href="mailto:drlpowers-l@rogers.com" class="modal-option">
+                <span class="label">Email</span>
+                <span class="value">drlpowers-l@rogers.com</span>
+            </a>
+        </div>
+    </div>
+
     <footer>
+        <p class="footer-contact"><a href="tel:416-418-6851">416-418-6851</a> &nbsp;·&nbsp; <a href="mailto:drlpowers-l@rogers.com">drlpowers-l@rogers.com</a></p>
         <p>&copy; 2025 Dr. Lisa Powers-Luketic, Clinical Neuropsychologist &amp; Clinical Psychologist</p>
         <p>Practicing since 1995 | Client-Centered Care</p>
     </footer>
@@ -806,6 +926,30 @@
 
             window.addEventListener('hashchange', route);
             route();
+        })();
+
+        // "Book a Consultation": calls directly on phones, opens a call/email popup on computers
+        (function () {
+            var modal = document.getElementById('contact-modal');
+            var isPhone = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
+
+            function close() { modal.hidden = true; }
+
+            document.querySelectorAll('.js-book').forEach(function (btn) {
+                btn.addEventListener('click', function (e) {
+                    if (isPhone) return;
+                    e.preventDefault();
+                    modal.hidden = false;
+                });
+            });
+
+            modal.addEventListener('click', function (e) {
+                if (e.target === modal) close();
+            });
+            modal.querySelector('.modal-close').addEventListener('click', close);
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape') close();
+            });
         })();
     </script>
 </body>
