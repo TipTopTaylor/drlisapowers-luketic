@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dr. Lisa Powers-Luketic - Clinical Neuropsychology & Clinical Psychology</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --green-900: #1c3b30;
+            --green-700: #2d5a4a;
+            --green-500: #5a8a75;
+            --green-100: #e9f1ed;
+            --green-50: #f5f9f7;
+            --text: #1f2a26;
+            --muted: #4f5d57;
+            --border: #dbe5e0;
+            --radius: 14px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        [hidden] { display: none !important; }
+
+        html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+            font-size: 18px;
+            line-height: 1.7;
+            color: var(--text);
+            background: #ffffff;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-weight: 600;
+            line-height: 1.25;
+            color: var(--green-900);
+        }
+
+        /* Navigation */
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0.9rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        .nav-name {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: var(--green-900);
+            text-decoration: none;
+        }
+
+        .nav-links { display: flex; gap: 0.25rem; flex-wrap: wrap; }
+
+        .nav-links a {
+            color: var(--muted);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            padding: 0.45rem 0.9rem;
+            border-radius: 999px;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .nav-links a:hover { background: var(--green-100); color: var(--green-900); }
+        .nav-links a.nav-cta { background: var(--green-700); color: #fff; }
+        .nav-links a.nav-cta:hover { background: var(--green-900); }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(160deg, var(--green-50) 0%, var(--green-100) 100%);
+            padding: 6rem 1.5rem 5rem;
+            text-align: center;
+        }
+
+        .hero h1 { font-size: clamp(2.2rem, 5vw, 3.4rem); margin-bottom: 1rem; }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--muted);
+            font-weight: 500;
+            letter-spacing: 0.02em;
+            max-width: 680px;
+            margin: 0 auto;
+        }
+
+        .header-btn {
+            display: inline-block;
+            margin-top: 2rem;
+            background: var(--green-700);
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 0.85rem 1.8rem;
+            border-radius: 999px;
+            transition: background 0.2s, transform 0.2s;
+        }
+
+        .header-btn:hover { background: var(--green-900); transform: translateY(-1px); }
+
+        /* Layout */
+        .container { max-width: 1100px; margin: 0 auto; padding: 4.5rem 1.5rem; }
+        section { margin-bottom: 5rem; }
+
+        h2 {
+            font-size: clamp(1.8rem, 3.5vw, 2.3rem);
+            margin-bottom: 1.75rem;
+            position: relative;
+            padding-bottom: 0.9rem;
+        }
+
+        h2::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 56px;
+            height: 3px;
+            border-radius: 2px;
+            background: var(--green-500);
+        }
+
+        h3 { font-size: 1.35rem; }
+        p { margin-bottom: 1.25rem; color: var(--text); }
+
+        /* About / bio */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .photo {
+            position: relative;
+            aspect-ratio: 4 / 5;
+            border-radius: var(--radius);
+            overflow: hidden;
+            background: var(--green-100);
+            border: 1px solid var(--border);
+            box-shadow: 0 10px 24px rgba(28, 59, 48, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .photo img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1;
+        }
+
+        .photo-placeholder { color: var(--muted); font-size: 0.95rem; font-weight: 500; }
+
+        .bio p { font-size: 1.1rem; }
+        .bio p.lead { font-size: 1.25rem; line-height: 1.7; color: var(--green-900); }
+
+        .experience {
+            background: var(--green-50);
+            border-left: 4px solid var(--green-700);
+            border-radius: 0 var(--radius) var(--radius) 0;
+            padding: 1.5rem 1.75rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .experience p { margin: 0; }
+
+        /* Education */
+        .credentials {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.25rem;
+            list-style: none;
+        }
+
+        .credentials li {
+            background: var(--green-50);
+            border-radius: var(--radius);
+            padding: 1.5rem 1.6rem;
+            border-top: 3px solid var(--green-500);
+        }
+
+        .credentials .degree {
+            display: block;
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-weight: 600;
+            font-size: 1.2rem;
+            color: var(--green-900);
+            margin-bottom: 0.25rem;
+        }
+
+        .credentials .school { color: var(--muted); font-size: 0.98rem; }
+
+        /* Specialties */
+        .specialties {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .specialty-card {
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 2rem;
+            box-shadow: 0 1px 2px rgba(28, 59, 48, 0.04);
+            transition: box-shadow 0.25s, transform 0.25s, border-color 0.25s;
+        }
+
+        .specialty-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--green-500);
+            box-shadow: 0 10px 24px rgba(28, 59, 48, 0.08);
+        }
+
+        .specialty-card h3 { margin-bottom: 0.75rem; }
+        .specialty-card p { color: var(--muted); margin: 0; }
+
+        /* Therapy approaches */
+        .approach-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.25rem;
+        }
+
+        .approach-link {
+            display: flex;
+            flex-direction: column;
+            background: var(--green-50);
+            border: 1px solid transparent;
+            border-radius: var(--radius);
+            padding: 1.6rem 1.75rem;
+            text-decoration: none;
+            color: inherit;
+            transition: border-color 0.2s, background 0.2s, transform 0.2s;
+        }
+
+        .approach-link:hover {
+            background: #fff;
+            border-color: var(--green-500);
+            transform: translateY(-2px);
+        }
+
+        .approach-link h3 { font-size: 1.2rem; margin-bottom: 0.4rem; }
+        .approach-link p { color: var(--muted); font-size: 0.98rem; margin-bottom: 0.9rem; }
+        .approach-link .more-link { margin-top: auto; font-weight: 600; font-size: 0.95rem; color: var(--green-700); }
+        .section-note { color: var(--muted); margin-top: 1.5rem; font-size: 1rem; }
+
+        /* Therapy detail pages */
+        .article { max-width: 760px; margin: 0 auto; }
+
+        .back-link {
+            display: inline-block;
+            color: var(--green-700);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .back-link:hover { text-decoration: underline; }
+
+        .article h2 { font-size: 1.7rem; margin-top: 3rem; margin-bottom: 1.25rem; }
+        .article h2:first-of-type { margin-top: 0; }
+        .article p, .article li { font-size: 1.08rem; }
+        .article ul { padding-left: 1.25rem; margin-bottom: 1.25rem; }
+        .article li { margin-bottom: 0.6rem; }
+        .article li::marker { color: var(--green-500); }
+
+        .callout {
+            background: var(--green-50);
+            border-left: 4px solid var(--green-700);
+            border-radius: 0 var(--radius) var(--radius) 0;
+            padding: 1.5rem 1.75rem;
+            margin: 2rem 0;
+        }
+
+        .callout p:last-child { margin-bottom: 0; }
+
+        .other-approaches { margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--border); }
+        .other-approaches h3 { font-size: 1.1rem; margin-bottom: 1rem; }
+        .pill-links { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+
+        .pill-links a {
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 999px;
+            padding: 0.45rem 1rem;
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--green-900);
+            text-decoration: none;
+            transition: border-color 0.2s, background 0.2s;
+        }
+
+        .pill-links a:hover { border-color: var(--green-500); background: var(--green-50); }
+
+        /* Contact CTA */
+        .cta {
+            background: var(--green-700);
+            color: #fff;
+            border-radius: calc(var(--radius) * 1.5);
+            padding: 3.5rem 2rem;
+            text-align: center;
+        }
+
+        .cta h2 { color: #fff; padding-bottom: 0; }
+        .cta h2::after { display: none; }
+        .cta p { color: rgba(255, 255, 255, 0.88); max-width: 620px; margin-left: auto; margin-right: auto; }
+        .phone { margin: 2rem 0; }
+
+        .phone a {
+            display: inline-block;
+            background: #fff;
+            color: var(--green-900);
+            text-decoration: none;
+            font-size: clamp(1.4rem, 4vw, 1.9rem);
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            padding: 0.85rem 2rem;
+            border-radius: 999px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .phone a:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); }
+
+        /* Footer */
+        footer {
+            background: var(--green-900);
+            color: rgba(255, 255, 255, 0.8);
+            text-align: center;
+            padding: 2.25rem 1.5rem;
+            font-size: 0.92rem;
+        }
+
+        footer p { color: inherit; margin: 0; }
+        footer p + p { margin-top: 0.35rem; font-size: 0.85rem; opacity: 0.75; }
+
+        /* Mobile */
+        @media (max-width: 720px) {
+            body { font-size: 17px; }
+            .nav-inner { flex-direction: column; padding: 0.75rem 1rem; }
+            .nav-links { justify-content: center; }
+            .hero { padding: 4rem 1.25rem 3.5rem; }
+            .container { padding: 3rem 1.25rem; }
+            .about-grid { grid-template-columns: 1fr; gap: 1.75rem; }
+            .photo { max-width: 260px; margin: 0 auto; width: 100%; }
+            .specialty-card, .callout, .experience { padding: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-inner">
+            <a href="#top" class="nav-name">Dr. Lisa Powers-Luketic</a>
+            <div class="nav-links">
+                <a href="#about">About</a>
+                <a href="#education">Education</a>
+                <a href="#services">Services</a>
+                <a href="#approaches">Therapies</a>
+                <a href="#contact" class="nav-cta">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ===================== HOME ===================== -->
+    <main class="view" data-view="home">
+        <header class="hero" id="top">
+            <h1>Dr. Lisa Powers-Luketic, Psychologist</h1>
+            <p>Clinical Neuropsychology &amp; Clinical Psychology</p>
+            <a href="tel:416-418-6851" class="header-btn">Book a Consultation</a>
+        </header>
+
+        <div class="container">
+            <section id="about">
+                <h2>About Dr. Powers-Luketic</h2>
+                <div class="about-grid">
+                    <div class="photo">
+                        <img src="picture.png" alt="Dr. Lisa Powers-Luketic" onerror="this.style.display='none'">
+                        <span class="photo-placeholder">Photo coming soon</span>
+                    </div>
+                    <div class="bio">
+                        <p class="lead">With more than 30 years of experience in both clinical psychology and neuropsychology, I am committed to providing compassionate, client-centered care that prioritizes your unique needs and recovery journey above all else.</p>
+                        <div class="experience">
+                            <p>I have longstanding experience with adults and older adults in clinical psychology and neuropsychology in the areas of psychological and neuropsychological assessment, cognitive rehabilitation, and psychotherapy. This includes experience with brain injury, stroke, dementia and other neurological conditions; learning difficulties, emotional trauma, PTSD, depression and anxiety disorders.</p>
+                        </div>
+                        <p>My practice is built on the belief that every individual deserves personalized attention, understanding, and evidence-based treatment tailored to their specific circumstances. Your wellbeing is at the heart of everything I do.</p>
+                        <p>I work to create a safe, non-judgmental space where you can explore your challenges and work toward meaningful change. Each treatment plan is carefully designed around your individual needs, strengths, and goals.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="education">
+                <h2>Education &amp; Professional Training</h2>
+                <ul class="credentials">
+                    <li>
+                        <span class="degree">PhD, Clinical Neuropsychology</span>
+                        <span class="school">University of Toronto</span>
+                    </li>
+                    <li>
+                        <span class="degree">Master's Degree, Psychology</span>
+                        <span class="school">University of Toronto</span>
+                    </li>
+                    <li>
+                        <span class="degree">Bachelor's Degree</span>
+                        <span class="school">University of Toronto</span>
+                    </li>
+                    <!-- Professional memberships: add once confirmed, e.g.
+                    <li>
+                        <span class="degree">Registered Member</span>
+                        <span class="school">College of Psychologists and Behaviour Analysts of Ontario, #XXXX</span>
+                    </li>
+                    -->
+                </ul>
+            </section>
+
+            <section id="services">
+                <h2>Areas of Specialization</h2>
+                <div class="specialties">
+                    <div class="specialty-card">
+                        <h3>Traumatic Brain Injuries</h3>
+                        <p>Comprehensive assessment and treatment for individuals recovering from TBI, focusing on cognitive rehabilitation and emotional adjustment.</p>
+                    </div>
+                    <div class="specialty-card">
+                        <h3>Neuropsychological Assessment</h3>
+                        <p>Detailed evaluation of cognitive functions, memory, attention, and executive functioning to guide treatment planning.</p>
+                    </div>
+                    <div class="specialty-card">
+                        <h3>Individual Therapy</h3>
+                        <p>One-on-one therapeutic support using evidence-based approaches tailored to your specific needs and goals.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="approaches">
+                <h2>Evidence-Based Therapeutic Approaches</h2>
+                <div class="approach-grid">
+                    <a href="#cbt" class="approach-link">
+                        <h3>Cognitive Behavioral Therapy (CBT)</h3>
+                        <p>Understanding how thoughts, feelings, and behaviours connect, and building practical skills to change unhelpful patterns.</p>
+                        <span class="more-link">Learn more →</span>
+                    </a>
+                    <a href="#cpt" class="approach-link">
+                        <h3>Cognitive Processing Therapy (CPT)</h3>
+                        <p>A structured, trauma-focused therapy that helps you work through beliefs that keep you stuck after a traumatic event.</p>
+                        <span class="more-link">Learn more →</span>
+                    </a>
+                    <a href="#wet" class="approach-link">
+                        <h3>Written Exposure Therapy (WET)</h3>
+                        <p>A brief, five-session trauma treatment that uses guided writing to reduce the hold of traumatic memories.</p>
+                        <span class="more-link">Learn more →</span>
+                    </a>
+                    <a href="#act" class="approach-link">
+                        <h3>Acceptance and Commitment Therapy (ACT)</h3>
+                        <p>Making room for difficult thoughts and feelings while moving toward what matters most to you.</p>
+                        <span class="more-link">Learn more →</span>
+                    </a>
+                    <a href="#dbt" class="approach-link">
+                        <h3>Dialectical Behavior Therapy (DBT)</h3>
+                        <p>Practical skills for managing intense emotions, tolerating distress, and improving relationships.</p>
+                        <span class="more-link">Learn more →</span>
+                    </a>
+                    <a href="#mindfulness" class="approach-link">
+                        <h3>Mindfulness</h3>
+                        <p>Learning to notice the present moment with openness and without judgment, reducing stress and reactivity.</p>
+                        <span class="more-link">Learn more →</span>
+                    </a>
+                </div>
+                <p class="section-note">Along with other approaches, selected and combined to fit your needs.</p>
+            </section>
+
+            <div class="cta" id="contact">
+                <h2>Begin Your Journey to Wellness</h2>
+                <p>Taking the first step toward healing takes courage. I'm here to support you with compassionate, professional care.</p>
+                <div class="phone">
+                    <a href="tel:416-418-6851">416-418-6851</a>
+                </div>
+                <p>Call today to schedule a confidential consultation and learn how we can work together toward your goals.</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- ===================== CBT ===================== -->
+    <main class="view" data-view="cbt" hidden>
+        <header class="hero">
+            <h1>Cognitive Behavioral Therapy</h1>
+            <p>A practical, goal-focused approach to changing unhelpful patterns of thinking and behaviour.</p>
+        </header>
+        <div class="container">
+            <div class="article">
+                <a href="#approaches" class="back-link">← All therapeutic approaches</a>
+
+                <h2>What is CBT?</h2>
+                <p>Cognitive Behavioral Therapy (CBT) is built on a simple idea: our thoughts, feelings, and behaviours are closely connected. The way we interpret a situation shapes how we feel about it, and how we feel shapes what we do. When those patterns become stuck or unhelpful, they can keep difficulties like anxiety or low mood going.</p>
+                <p>CBT is one of the most widely researched forms of psychotherapy. It is structured, collaborative, and focused on the present, with an emphasis on learning skills you can keep using long after therapy ends.</p>
+
+                <h2>How it works</h2>
+                <ul>
+                    <li><strong>Noticing patterns:</strong> identifying the thoughts and reactions that show up in difficult moments.</li>
+                    <li><strong>Examining thoughts:</strong> looking at the evidence for and against unhelpful beliefs, and developing more balanced ways of seeing things.</li>
+                    <li><strong>Changing behaviours:</strong> gradually trying new actions, such as facing avoided situations or rebuilding routines.</li>
+                    <li><strong>Practising between sessions:</strong> short exercises that help new skills become part of everyday life.</li>
+                </ul>
+
+                <h2>Why it can help</h2>
+                <p>CBT has strong research support for depression, anxiety, panic, worry, insomnia, and stress, and it is often helpful in coping with chronic pain and health conditions. It can also be adapted for people adjusting to life after a brain injury, where it may support emotional adjustment, confidence, and coping with changes in day-to-day functioning.</p>
+
+                <div class="callout">
+                    <p><strong>What to expect:</strong> CBT is usually time-limited, with clear goals set together at the start. Sessions are active and collaborative, and progress is reviewed along the way.</p>
+                </div>
+
+                <div class="other-approaches">
+                    <h3>Other approaches</h3>
+                    <div class="pill-links">
+                        <a href="#cpt">Cognitive Processing Therapy</a>
+                        <a href="#wet">Written Exposure Therapy</a>
+                        <a href="#act">Acceptance and Commitment Therapy</a>
+                        <a href="#dbt">Dialectical Behavior Therapy</a>
+                        <a href="#mindfulness">Mindfulness</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- ===================== CPT ===================== -->
+    <main class="view" data-view="cpt" hidden>
+        <header class="hero">
+            <h1>Cognitive Processing Therapy</h1>
+            <p>A structured, evidence-based treatment for recovering from trauma and PTSD.</p>
+        </header>
+        <div class="container">
+            <div class="article">
+                <a href="#approaches" class="back-link">← All therapeutic approaches</a>
+
+                <h2>What is CPT?</h2>
+                <p>Cognitive Processing Therapy (CPT) is a trauma-focused therapy designed to help people recover from post-traumatic stress disorder (PTSD) and related difficulties. After a traumatic event, it is common to develop beliefs that make sense in the moment but keep us stuck, such as blaming ourselves, feeling that the world is completely unsafe, or finding it hard to trust others.</p>
+                <p>CPT helps you understand how the trauma has affected the way you think about yourself, other people, and the world, and gives you tools to work through those beliefs.</p>
+
+                <h2>How it works</h2>
+                <ul>
+                    <li><strong>Learning about trauma:</strong> understanding common reactions to trauma and why symptoms can persist.</li>
+                    <li><strong>Identifying "stuck points":</strong> naming the specific beliefs that keep painful emotions going.</li>
+                    <li><strong>Examining those beliefs:</strong> using structured worksheets and guided questions to look at them from new angles.</li>
+                    <li><strong>Rebuilding key areas:</strong> working through themes such as safety, trust, control, self-esteem, and closeness with others.</li>
+                </ul>
+
+                <h2>Why it can help</h2>
+                <p>CPT is one of the most thoroughly studied treatments for PTSD and is recommended in major clinical practice guidelines. It has been shown to reduce PTSD symptoms for many people, including those affected by accidents, assault, combat, and other traumatic experiences, and improvements often extend to depression, guilt, and shame as well.</p>
+
+                <div class="callout">
+                    <p><strong>What to expect:</strong> CPT typically runs about 12 sessions, with short practice assignments between sessions. It focuses on how you make sense of the trauma, rather than requiring you to retell it in detail.</p>
+                </div>
+
+                <div class="other-approaches">
+                    <h3>Other approaches</h3>
+                    <div class="pill-links">
+                        <a href="#cbt">Cognitive Behavioral Therapy</a>
+                        <a href="#wet">Written Exposure Therapy</a>
+                        <a href="#act">Acceptance and Commitment Therapy</a>
+                        <a href="#dbt">Dialectical Behavior Therapy</a>
+                        <a href="#mindfulness">Mindfulness</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- ===================== WET ===================== -->
+    <main class="view" data-view="wet" hidden>
+        <header class="hero">
+            <h1>Written Exposure Therapy</h1>
+            <p>A brief, five-session treatment for PTSD that uses guided writing.</p>
+        </header>
+        <div class="container">
+            <div class="article">
+                <a href="#approaches" class="back-link">← All therapeutic approaches</a>
+
+                <h2>What is WET?</h2>
+                <p>Written Exposure Therapy (WET) is a short-term treatment for post-traumatic stress disorder (PTSD). Instead of avoiding memories of a traumatic event, which tends to keep distress going, WET helps you approach the memory in a safe, structured way through writing.</p>
+                <p>Because it is brief and does not involve homework between sessions, WET can be a good fit for people who want an effective trauma treatment with a smaller time commitment.</p>
+
+                <h2>How it works</h2>
+                <ul>
+                    <li><strong>Preparation:</strong> the first session includes learning about common trauma reactions and how the treatment works.</li>
+                    <li><strong>Guided writing:</strong> in each session, you write about the traumatic event for about 30 minutes, following specific instructions.</li>
+                    <li><strong>Deepening over time:</strong> the focus gradually shifts from the details of the event to the feelings and meaning attached to it, and how it has affected your life.</li>
+                    <li><strong>Check-in and support:</strong> each session ends with time to talk through the experience together.</li>
+                </ul>
+
+                <h2>Why it can help</h2>
+                <p>Research has found WET to be effective at reducing PTSD symptoms, with results comparable to longer trauma treatments. Fewer people tend to drop out of WET than other trauma therapies, likely because it is brief and well structured. Repeatedly writing about the memory in a safe setting helps reduce its emotional intensity and allows it to be processed rather than avoided.</p>
+
+                <div class="callout">
+                    <p><strong>What to expect:</strong> WET consists of five sessions, with no assignments between them. It is normal to feel some distress during the writing; this tends to lessen as sessions progress.</p>
+                </div>
+
+                <div class="other-approaches">
+                    <h3>Other approaches</h3>
+                    <div class="pill-links">
+                        <a href="#cbt">Cognitive Behavioral Therapy</a>
+                        <a href="#cpt">Cognitive Processing Therapy</a>
+                        <a href="#act">Acceptance and Commitment Therapy</a>
+                        <a href="#dbt">Dialectical Behavior Therapy</a>
+                        <a href="#mindfulness">Mindfulness</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- ===================== ACT ===================== -->
+    <main class="view" data-view="act" hidden>
+        <header class="hero">
+            <h1>Acceptance and Commitment Therapy</h1>
+            <p>Building a meaningful life alongside difficult thoughts and feelings.</p>
+        </header>
+        <div class="container">
+            <div class="article">
+                <a href="#approaches" class="back-link">← All therapeutic approaches</a>
+
+                <h2>What is ACT?</h2>
+                <p>Acceptance and Commitment Therapy (ACT, pronounced like the word "act") takes a different angle from many therapies. Rather than trying to eliminate painful thoughts and feelings, ACT helps you change your relationship with them, so they have less power to pull you away from the life you want.</p>
+                <p>The goal is psychological flexibility: being able to stay present with what you are experiencing and still choose actions guided by your values.</p>
+
+                <h2>How it works</h2>
+                <ul>
+                    <li><strong>Acceptance:</strong> making room for uncomfortable feelings instead of struggling against them.</li>
+                    <li><strong>Defusion:</strong> learning to step back from thoughts and see them as thoughts, not facts or commands.</li>
+                    <li><strong>Present-moment awareness:</strong> using mindfulness to engage with what is happening now.</li>
+                    <li><strong>Values:</strong> clarifying what truly matters to you.</li>
+                    <li><strong>Committed action:</strong> taking practical steps toward those values, even when it is hard.</li>
+                </ul>
+
+                <h2>Why it can help</h2>
+                <p>ACT is supported by a large body of research for anxiety, depression, stress, and chronic pain. It is particularly helpful when circumstances cannot simply be fixed, such as living with a chronic health condition or adjusting to lasting changes after an injury. By shifting the focus from "getting rid of" symptoms to living well, many people find renewed purpose and reduced distress.</p>
+
+                <div class="callout">
+                    <p><strong>What to expect:</strong> ACT sessions combine conversation, experiential exercises, and metaphors that make the ideas easy to remember and apply in daily life.</p>
+                </div>
+
+                <div class="other-approaches">
+                    <h3>Other approaches</h3>
+                    <div class="pill-links">
+                        <a href="#cbt">Cognitive Behavioral Therapy</a>
+                        <a href="#cpt">Cognitive Processing Therapy</a>
+                        <a href="#wet">Written Exposure Therapy</a>
+                        <a href="#dbt">Dialectical Behavior Therapy</a>
+                        <a href="#mindfulness">Mindfulness</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- ===================== DBT ===================== -->
+    <main class="view" data-view="dbt" hidden>
+        <header class="hero">
+            <h1>Dialectical Behavior Therapy</h1>
+            <p>Practical skills for managing intense emotions and strengthening relationships.</p>
+        </header>
+        <div class="container">
+            <div class="article">
+                <a href="#approaches" class="back-link">← All therapeutic approaches</a>
+
+                <h2>What is DBT?</h2>
+                <p>Dialectical Behavior Therapy (DBT) is a skills-based therapy for people who experience emotions very intensely and find them hard to manage. "Dialectical" refers to balancing two ideas that can seem opposite: accepting yourself as you are, while also working to change.</p>
+                <p>Originally developed to help people with severe emotional distress, DBT skills are now widely used to help anyone struggling with emotional overwhelm, impulsive reactions, or difficult relationships.</p>
+
+                <h2>The four skill areas</h2>
+                <ul>
+                    <li><strong>Mindfulness:</strong> paying attention to the present moment and noticing thoughts and feelings without being swept away by them.</li>
+                    <li><strong>Distress tolerance:</strong> getting through crisis moments without making things worse.</li>
+                    <li><strong>Emotion regulation:</strong> understanding emotions, reducing vulnerability to them, and changing ones you want to change.</li>
+                    <li><strong>Interpersonal effectiveness:</strong> asking for what you need, setting boundaries, and maintaining relationships and self-respect.</li>
+                </ul>
+
+                <h2>Why it can help</h2>
+                <p>DBT has strong research support for reducing self-destructive behaviours and emotional dysregulation, and its skills are helpful for mood difficulties, anxiety, and stress. Because the skills are concrete and teachable, they can also be useful for people experiencing irritability or emotional changes after a brain injury.</p>
+
+                <div class="callout">
+                    <p><strong>What to expect:</strong> In individual therapy, DBT skills are taught and practised step by step and applied to the real situations in your life.</p>
+                </div>
+
+                <div class="other-approaches">
+                    <h3>Other approaches</h3>
+                    <div class="pill-links">
+                        <a href="#cbt">Cognitive Behavioral Therapy</a>
+                        <a href="#cpt">Cognitive Processing Therapy</a>
+                        <a href="#wet">Written Exposure Therapy</a>
+                        <a href="#act">Acceptance and Commitment Therapy</a>
+                        <a href="#mindfulness">Mindfulness</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- ===================== MINDFULNESS ===================== -->
+    <main class="view" data-view="mindfulness" hidden>
+        <header class="hero">
+            <h1>Mindfulness</h1>
+            <p>Learning to meet the present moment with openness, curiosity, and calm.</p>
+        </header>
+        <div class="container">
+            <div class="article">
+                <a href="#approaches" class="back-link">← All therapeutic approaches</a>
+
+                <h2>What is mindfulness?</h2>
+                <p>Mindfulness means paying attention to the present moment, on purpose, without judging what you notice. Much of our distress comes from replaying the past or worrying about the future. Mindfulness gently brings attention back to what is happening right now.</p>
+                <p>It is a skill that can be learned by anyone, and it forms a core part of several evidence-based therapies, including ACT, DBT, and mindfulness-based cognitive therapy.</p>
+
+                <h2>How it works</h2>
+                <ul>
+                    <li><strong>Focused attention:</strong> practices such as mindful breathing that steady the mind.</li>
+                    <li><strong>Body awareness:</strong> exercises like the body scan that help you notice tension and physical sensations.</li>
+                    <li><strong>Observing thoughts:</strong> learning to notice thoughts come and go without getting caught up in them.</li>
+                    <li><strong>Everyday mindfulness:</strong> bringing awareness to ordinary activities like walking or eating.</li>
+                </ul>
+
+                <h2>Why it can help</h2>
+                <p>Research shows that mindfulness practice can reduce stress, anxiety, and symptoms of depression, and mindfulness-based approaches can help prevent depression from returning. It can also make chronic pain more manageable and support attention and emotional balance. Over time, mindfulness helps create a pause between an experience and your reaction, giving you more choice in how you respond.</p>
+
+                <div class="callout">
+                    <p><strong>What to expect:</strong> Mindfulness is introduced gradually with short, guided practices in session and simple ways to build them into daily life. No prior meditation experience is needed.</p>
+                </div>
+
+                <div class="other-approaches">
+                    <h3>Other approaches</h3>
+                    <div class="pill-links">
+                        <a href="#cbt">Cognitive Behavioral Therapy</a>
+                        <a href="#cpt">Cognitive Processing Therapy</a>
+                        <a href="#wet">Written Exposure Therapy</a>
+                        <a href="#act">Acceptance and Commitment Therapy</a>
+                        <a href="#dbt">Dialectical Behavior Therapy</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Shared contact box shown at the bottom of every therapy page -->
+    <div class="container" id="page-cta" hidden style="padding-top: 0;">
+        <div class="article">
+            <div class="cta">
+                <h2>Wondering if this is right for you?</h2>
+                <p>Call to schedule a confidential consultation and talk through which approach best fits your needs.</p>
+                <div class="phone">
+                    <a href="tel:416-418-6851">416-418-6851</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Dr. Lisa Powers-Luketic, Clinical Neuropsychologist &amp; Clinical Psychologist</p>
+        <p>Practicing since 1995 | Client-Centered Care</p>
+    </footer>
+
+    <script>
+        // Shows the home page or a therapy page depending on the link clicked (#cbt, #act, etc.)
+        (function () {
+            var views = document.querySelectorAll('.view');
+            var pageCta = document.getElementById('page-cta');
+            var pages = Array.prototype.map.call(views, function (v) { return v.dataset.view; });
+
+            function route() {
+                var hash = location.hash.slice(1);
+                var isPage = hash !== 'home' && pages.indexOf(hash) !== -1;
+                var active = isPage ? hash : 'home';
+
+                views.forEach(function (v) { v.hidden = v.dataset.view !== active; });
+                pageCta.hidden = !isPage;
+
+                if (isPage) {
+                    window.scrollTo(0, 0);
+                    document.title = document.querySelector('[data-view="' + hash + '"] h1').textContent + ' - Dr. Lisa Powers-Luketic';
+                } else {
+                    document.title = 'Dr. Lisa Powers-Luketic - Clinical Neuropsychology & Clinical Psychology';
+                    var target = hash && document.getElementById(hash);
+                    if (target) target.scrollIntoView();
+                }
+            }
+
+            window.addEventListener('hashchange', route);
+            route();
+        })();
+    </script>
+</body>
+</html>
